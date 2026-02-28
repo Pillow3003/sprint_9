@@ -1,13 +1,13 @@
 from selenium.webdriver.common.by import By
 
 class MainPageLocators:
-    main_page_text = By.XPATH, "//h1[text()='Войти на сайт']"  # текст войти на сайт на главной странице
-    click_login_button = By.XPATH, "//button[text()='Войти']"  # кнопка войти на главной странице
-    click_logout_button = By.XPATH, "//a[text()='Выход']"  # кнопка выход
-    main_page_recipes_text = By.XPATH, "//h1[text()='Рецепты']"  # текст рецепты на главной странице
+    main_page_header_text = By.XPATH, "//h1[text()='Войти на сайт']"  # Заголовок "Войти на сайт" на главной странице
+    login_button = By.XPATH, "//button[text()='Войти']"  # Кнопка входа
+    logout_link = By.XPATH, "//a[text()='Выход']"  # Ссылка выхода
+    recipes_page_header = By.XPATH, "//h1[text()='Рецепты']"  # Заголовок "Рецепты" на странице рецептов
 
-    click_account_button = By.XPATH, "//a[text()='Создать аккаунт']" # создать аккаунт
-    click_create_account_button = By.XPATH, "//button[text()='Создать аккаунт']"  # создание аккаунта
-    input_fields = By.XPATH, "//input[@class= 'styles_inputField__3eqTj']"  # список полей регистрации аккаунта
-    login_email = By.XPATH, "//input[@name='email']"  # авторизация: ввод email
-    login_password = By.XPATH, "//input[@name='password']"  # авторизация: ввод password
+    create_account_link = By.XPATH, "//a[text()='Создать аккаунт']"  # Ссылка для перехода к созданию аккаунта
+    create_account_button = By.XPATH, "//button[text()='Создать аккаунт']"  # Кнопка для регистрации нового аккаунта
+    registration_input_fields = By.XPATH, "//input[@class='styles_inputField__3eqTj']"  # Поля ввода при регистрации
+    registration_email_input = By.XPATH, "//input[@name='email']"  # Поле ввода email для регистрации
+    registration_password_input = By.XPATH, "//input[@name='password']"  # Поле ввода пароля для регистрации

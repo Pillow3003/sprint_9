@@ -1,21 +1,20 @@
 from selenium.webdriver.common.by import By
 
 class RecipePageLocators:
+    create_recipe_tab = By.XPATH, "//a[text()='Создать рецепт']"  # Вкладка для создания рецепта
 
-    click_create_recipe = By.XPATH, "//a[text()='Создать рецепт']"  # tab создать рецепт
+    recipe_input_fields = By.XPATH, "//input[@class[contains(.,'styles_inputField__3eqTj')]]"  # Поля для заполнения рецепта
+    recipe_description = By.XPATH, "//textarea[@class='styles_textareaField__1wfhC']"  # Описание рецепта
+    ingredients_container = By.XPATH, "//div[@class='styles_container__3ukwm']"  # Контейнер списка ингредиентов
+    add_ingredient_button = By.XPATH, "//div[@class='styles_ingredientAdd__3fc32']"  # Кнопка добавления ингредиента
+    ingredient_div = By.XPATH, "//div"  # Общий див для ингредиента (при необходимости уточнить)
 
-    recipe_fields = By.XPATH, "//input[@class[contains(.,'styles_inputField__3eqTj')]]"  # список полей создания рецепта
-    recipe_text = By.XPATH, "//textarea[@class= 'styles_textareaField__1wfhC']"  # описание рецепта
-    ingredients_list = By.XPATH, "//div[@class= 'styles_container__3ukwm']"  # список ингредиентов при вводе/поиске
-    click_add_ingredient = By.XPATH, "//div[@class='styles_ingredientAdd__3fc32']"  # кнопка добавить ингредиент
-    ingredient_div = By.XPATH, "//div"  #
+    recipe_image_form = By.XPATH, "//div[@class='styles_button__xzu5F']"  # Форма выбора файла с изображением
+    recipe_image_input = By.XPATH, "//input[@class='styles_fileInput__3HjP3']"  # Поле загрузки файла с изображением
 
-    form_input_file = By.XPATH, "//div[@class='styles_button__xzu5F']"  # форма выбор файла с фото рецепта
-    input_file = By.XPATH, "//input[@class='styles_fileInput__3HjP3']"  # выбор файла с фото рецепта
+    create_recipe_button = By.XPATH, "//button[text()='Создать рецепт']"  # Кнопка подтверждения создания рецепта
 
-    button_create_recipe = By.XPATH, "//button[text()='Создать рецепт']"  # кнопка войти на главной странице
+    recipe_title_card = By.XPATH, "//h1[@class='styles_single-card__title__2QMPq']"  # Название рецепта на карточке
+    edit_recipe_link = By.XPATH, "//a[@class[contains(.,'style_link__1kPh8 styles_single-card__edit__Mb_wc')]]"  # Ссылка для редактирования рецепта
 
-    recipe_card_name = By.XPATH, "//h1[@class='styles_single-card__title__2QMPq']"  # карточка рецепта: наименование
-    recipe_card_edit = By.XPATH, "//a[@class[contains(.,'style_link__1kPh8 styles_single-card__edit__Mb_wc')]]"  # карточка рецепта: редактирование
-
-    recipe_ingredient = By.CSS_SELECTOR, "div:first-child"
+    first_ingredient_div = By.CSS_SELECTOR, "div:first-child"  # Первый элемент списка ингредиентов
