@@ -6,8 +6,8 @@ from pages.recipe_page import RecipePage
 
 class TestRecipePage():
 
-    @allure.title('Создание нового рецепта и отображение карточки')
-    @allure.description('Проверить, что после создания рецепта отображается его карточка.')
+    @allure.title('Создание рецепта')
+    @allure.description('Проверить, отображается ли карточка созданного рецепта')
     @allure.testcase('Тест-кейс из Sprint_9')
     def test_create_recipe_card_recipe(self, driver, createaccount, loginaccount):
         testcreaterecipe = RecipePage(driver)
@@ -16,8 +16,8 @@ class TestRecipePage():
 
         assert recipe_params[1] == data.RECIPE_FORM_EDIT
 
-    @allure.title('Проверка названия созданного рецепта')
-    @allure.description('Убеждаемся, что отображается название, которое вводили при создании.')
+    @allure.title('Создание рецепта')
+    @allure.description('Проверить, отображается ли название, которое заполняли при создании.')
     @allure.testcase('Тест-кейс из Sprint_9')
     def test_create_recipe_name_recipe(self, driver, createaccount, loginaccount):
         testcreaterecipe = RecipePage(driver)

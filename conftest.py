@@ -42,13 +42,11 @@ def driver():
 
 @pytest.fixture
 def createaccount(driver):
-    # Открытие сайта и создание аккаунта
     driver.get(data.BASE_URL)
     createaccount = MainPage(driver).create_account()
     return createaccount
 
 @pytest.fixture
 def loginaccount(driver, createaccount):
-    # Вход в аккаунт
     loginaccount = MainPage(driver).login_account(createaccount[3], createaccount[4])
     return loginaccount

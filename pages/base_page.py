@@ -18,76 +18,78 @@ class BasePage:
         self.timeout = 25
         self.wait = WebDriverWait(self.driver, self.timeout)
 
-    @allure.step('Переход по URL')
+    @allure.step('переход по url')
     def go_to_url(self, url):
         self.driver.get(url)
 
-    @allure.step('Поиск элемента на странице')
+    @allure.step('поиск элемента')
     def find_element_base(self, locator):
         return self.driver.find_element(*locator)
-
-    @allure.step('Поиск элемента с ожиданием')
+    @allure.step('поиск элемента с ожиданием')
     def find_element_with_wait(self, locator):
         self.wait.until(expected_conditions.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
-    @allure.step('Поиск кликабельного элемента с ожиданием')
+    @allure.step('поиск элемента с ожиданием кликабельности')
     def find_element_with_wait_clickable(self, locator):
         self.wait.until(expected_conditions.element_to_be_clickable(locator))
         return self.driver.find_element(*locator)
 
-    @allure.step('Поиск списка элементов с ожиданием')
+    @allure.step('поиск элементов с ожиданием')
     def find_elements_with_wait(self, locator):
         self.wait.until(expected_conditions.visibility_of_element_located(locator))
         return self.driver.find_elements(*locator)
 
-    @allure.step('Клик по элементу по локатору')
+    @allure.step('клик по элемент локатора')
     def click_element_locator(self, locator):
         WebDriverWait(self.driver, self.timeout).until(expected_conditions.element_to_be_clickable(locator))
         self.driver.find_element(*locator).click()
 
-    @allure.step('Клик по элементу для Firefox')
+    @allure.step('клик по локатору кнопки для Firefox')
     def click_on_element_for_firefox(self, locator):
         element = self.find_element_with_wait(locator)
         ActionChains(self.driver).move_to_element(element).click().perform()
 
-    @allure.step('Клик по web-элементу')
+
+
+    @allure.step('клик по web-элементу')
     def click_web_element(self, element):
         WebDriverWait(self.driver, self.timeout).until(expected_conditions.element_to_be_clickable(element))
         element.click()
 
-    @allure.step('Клик по web-элементу (для Firefox)')
+
+    @allure.step('клик по web-элементу кнопки для Firefox')
     def click_web_element_for_firefox(self, element):
         ActionChains(self.driver).move_to_element(element).click().perform()
 
-    @allure.step('Ввод текста в элемент')
+    @allure.step('добавление текста на элемент')
     def add_text_to_element(self, locator, text):
         self.find_element_with_wait(locator).send_keys(text)
 
-    @allure.step('Ввод текста в web-элемент')
+    @allure.step('добавление текста на web-элемент')
     def add_text_to_web_element(self, web_element, text):
         web_element.send_keys(text)
 
-    @allure.step('Получение текста из элемента')
+    @allure.step('получение текста элемента')
     def get_text_from_element(self, locator):
         return self.find_element_with_wait(locator).text
 
-    @allure.step('Получение текущего URL')
+    @allure.step('получение текущего url')
     def get_current_url(self):
         return self.driver.current_url
 
-    @allure.step('Ожидание видимости элемента')
+    @allure.step('ожидание видимости элемента')
     def wait_to_element(self, element_locator):
         self.wait.until(expected_conditions.visibility_of_element_located(element_locator))
 
-    @allure.step('Ожидание кликабельности элемента')
+    @allure.step('ожидание кликабельности элемента')
     def wait_element_to_clickable(self, element_locator):
         self.wait.until(expected_conditions.element_to_be_clickable(element_locator))
 
-    @allure.step('Ожидание отсутствия/присутствия текста элемента')
+    @allure.step('ожидание элемента по условию отсутствия/присутствия текста на элементе')
     def wait_until_condition(self, element_locator, expected_text, is_param):
         if is_param == 0:
-            self.wait_to_element(element_locator)
+            self.wait_to_element(element_locator, expected_text)
             self.wait.until(
                 expected_conditions.text_to_be_present_in_element(element_locator, expected_text)
             )
@@ -96,9 +98,9 @@ class BasePage:
                 expected_conditions.text_to_be_present_in_element(element_locator, expected_text)
             )
 
-    @allure.step('Прокрутка до элемента')
+    @allure.step('прокрутка элемента по локатору')
     def scroll_element(self, locator):
-        """Прокрутить страницу до элемента по локатору"""
+        """Пролистать страницу до элемента"""
         element = self.find_element_with_wait(locator)
         try:
             actions = ActionChains(self.driver)
@@ -106,7 +108,8 @@ class BasePage:
         except:
             self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    @allure.step('Перетаскивание элемента')
+
+    @allure.step('перетаскивание элемента')
     def drag_and_drop_element(self, locator_from, locator_to):
         WebDriverWait(self.driver, 25).until(expected_conditions.visibility_of_element_located(locator_from))
         WebDriverWait(self.driver, 25).until(expected_conditions.visibility_of_element_located(locator_to))
@@ -132,14 +135,14 @@ class BasePage:
            source.dispatchEvent(evt);
         """, element_from, element_to)
 
-    # Общие методы
-    @allure.step('Клик на кнопку Создать аккаунт')
+    # общие методы
+    @allure.step('клик на кнопку Создать аккаунт')
     def click_create_account(self):
         create_account = self.find_element_with_wait(MainPageLocators.click_account_button)
         self.wait_element_to_clickable(create_account)
         self.click_web_element(create_account)
 
-    @allure.step('Создание аккаунта: ввод данных')
+    @allure.step('регистрация: ввод имени')
     def put_param_create_account(self, first_name=None, last_name=None, user_name=None, email=None, password=None):
         input_fields = self.find_elements_with_wait(MainPageLocators.input_fields)
 
@@ -156,34 +159,34 @@ class BasePage:
         self.add_text_to_web_element(input_fields[4], password)
         return [first_name, last_name, user_name, email, password]
 
-    @allure.step('Клик по кнопке "Создать аккаунт"')
+    @allure.step('клик на кнопку создания аккаунта')
     def click_create_account_button(self):
         create_account_button = self.find_element_with_wait(MainPageLocators.click_create_account_button)
         self.wait_element_to_clickable(create_account_button)
         self.click_web_element(create_account_button)
 
-    @allure.step('Создание аккаунта')
+    @allure.step('созданиe аккаунта')
     def create_account(self):
         self.click_create_account()
         account_params = self.put_param_create_account()
         self.click_create_account_button()
         return account_params
 
-    @allure.step('Ввод email для входа')
+    @allure.step('ввод email')
     def put_login_email(self, email):
         self.wait_to_element(MainPageLocators.login_email)
         self.add_text_to_element(MainPageLocators.login_email, email)
 
-    @allure.step('Ввод пароля для входа')
+    @allure.step('ввод password')
     def put_login_password(self, password):
         self.wait_to_element(MainPageLocators.login_password)
         self.add_text_to_element(MainPageLocators.login_password, password)
 
-    @allure.step('Клик по кнопке "Войти"')
+    @allure.step('клик на кнопку войти')
     def click_login_button(self):
         self.click_element_locator(MainPageLocators.click_login_button)
 
-    @allure.step('Авторизация на сайте')
+    @allure.step('авторизация')
     def login_account(self, email, password):
         self.wait_to_element(MainPageLocators.main_page_text)
 

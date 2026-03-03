@@ -15,11 +15,11 @@ import data
 class RecipePage(BasePage):
 
 
-    @allure.step('Создание нового рецепта')
+    @allure.step('создание рецепта')
     def create_recipe(self, recipe_name=data.RECIPE_NAME, inredient_name=data.RECIPE_INGREDIENT, ingredient_vol=data.INGREDIENT_VOL, recipe_time=data.RECIPE_TIME, recipe_descr=data.RECIPE_DESCR, recipe_photo='caprese.jpg'):
-        create_recipe_elem = self.find_element_with_wait(RecipePageLocators.click_create_recipe)
-        self.wait_element_to_clickable(create_recipe_elem)
-        self.click_web_element(create_recipe_elem)
+        create_recipe = self.find_element_with_wait(RecipePageLocators.click_create_recipe)
+        self.wait_element_to_clickable(create_recipe)
+        self.click_web_element(create_recipe)
 
         input_fields = self.find_elements_with_wait(RecipePageLocators.recipe_fields)
 
@@ -40,7 +40,7 @@ class RecipePage(BasePage):
 
         return [self.get_text_from_element(RecipePageLocators.recipe_card_name), self.get_text_from_element(RecipePageLocators.recipe_card_edit)]
 
-    @allure.step('Добавление ингредиентов в рецепт')
+    @allure.step('добавление ингредиентов рецепта')
     def add_ingredients(self, web_inredient_name, web_ingredient_vol):
         # ввод ингредиента
         self.add_text_to_web_element(web_ingredient_vol, data.INGREDIENT_VOL)
@@ -53,13 +53,13 @@ class RecipePage(BasePage):
         self.click_element_locator(RecipePageLocators.click_add_ingredient)
 
 
-    @allure.step('Загрузка файла рецепта')
-    def load_recipe_file(self, recipe_photo='cookie.jpg'):
+    @allure.step('загрузка файла')
+    def load_recipe_file(self, recipe_photo='caprese.jpg'):
         # формирование пути к файлу
         APP_DIR = pathlib.Path(__file__).parent
         parent_dir = APP_DIR.parent
-        image_dir = parent_dir / "asserts"
-        file_path = str(image_dir) + "/" + recipe_photo # "/cookie.jpg"
+        image_dir = parent_dir/"assets"
+        file_path = str(image_dir) + "/" + recipe_photo # "/caprese.jpg"
 
         # загрузка файла
         self.scroll_element(RecipePageLocators.button_create_recipe)
